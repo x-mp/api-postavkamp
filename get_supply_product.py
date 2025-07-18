@@ -67,8 +67,8 @@ def get_supply_products(authorization_id, supplier_id, preorder_id):
 
 if __name__ == "__main__":
     # Пример использования функции
-    supplier_id = "c83942de-5dd2-4eea-8380-d26338584fac"
-    preorder_id = 42238453
+    supplier_id = "cwewee2de-5dd2-4eea-8380-dwew38584fac"
+    preorder_id = 1112324
     authorization_id = 4
     result = get_supply_products(
         authorization_id=authorization_id,
