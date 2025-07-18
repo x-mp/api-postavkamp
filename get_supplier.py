@@ -60,4 +60,5 @@ def get_suppliers(authorization_id=4):
         return None
 
 if __name__ == "__main__":
-    get_suppliers()
+    authorization_id = 4
+    get_suppliers(authorization_id=authorization_id)
