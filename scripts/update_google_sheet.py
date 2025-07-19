@@ -2,12 +2,15 @@ import os
 import json
 import time
 import logging
+import sys
+from pathlib import Path
 from dotenv import load_dotenv
 import gspread
 from google.oauth2.service_account import Credentials
 
-from get_supplier import get_suppliers
-from get_supply_wb import get_supply_wb
+sys.path.append(str(Path(__file__).resolve().parents[1]))
+
+from postavkamp import get_suppliers, get_supply_wb
 
 load_dotenv()
 
