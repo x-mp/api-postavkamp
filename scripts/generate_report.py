@@ -1,12 +1,18 @@
-import os
 import logging
+import os
+import sys
+from pathlib import Path
 import pandas as pd
 from dotenv import load_dotenv
 
-from get_auth_wb import get_active_authorizations
-from get_supplier import get_suppliers
-from get_supply_wb import get_supply_wb
-from get_supply_product import get_supply_products
+sys.path.append(str(Path(__file__).resolve().parents[1]))
+
+from postavkamp import (
+    get_active_authorizations,
+    get_suppliers,
+    get_supply_products,
+    get_supply_wb,
+)
 
 import requests
 

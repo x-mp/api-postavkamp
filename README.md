@@ -1,35 +1,50 @@
 # api-postavkamp
 
-Сервис API для получения данных через API Wildberries, расположенный на postavkamp.ru
+Набор скриптов и библиотека для работы с сервисом [postavkamp.ru](https://postavkamp.ru/) (получение данных Wildberries).
 
-## Описание
-Набор Python скриптов для работы с API Wildberries через сервис postavkamp.ru. Позволяет получать данные о поставках, товарах и поставщиках.
+## Структура проекта
+
+- `postavkamp/` — Python‑пакет с функциями для вызова API.
+- `scripts/` — примеры и утилиты для запуска из консоли.
+- `data/` — сюда сохраняются результаты работы скриптов.
+
+## Быстрый старт
+
+1. Установите зависимости:
+   ```bash
+   pip install -r requirements.txt
+   ```
+2. Скопируйте `.env_example` в `.env` и заполните переменные:
+   - `ACCESS_TOKEN` — JWT токен PostavkaMP;
+   - `TELEGRAM_BOT_TOKEN` и `TELEGRAM_CHAT_ID` — для отправки отчетов в Telegram;
+   - `GOOGLE_CREDENTIALS` — путь к файлу сервисного аккаунта Google;
+   - `GOOGLE_SHEET_ID` — ID вашей таблицы;
+   - `AUTHORIZATION_ID` — ID кабинета Wildberries.
+
+## Запуск
+
+### Создание отчета и отправка в Telegram
+```bash
+python scripts/generate_report.py
+```
+Файлы `report.xlsx` и `report.csv` будут сохранены в каталоге `data/` и отправлены в Telegram.
+
+### Обновление Google Sheets каждые 30 минут
+```bash
+python scripts/update_google_sheet.py
+```
+Скрипт обновит листы `Suppliers` и `Supplies` указанной таблицы.
+
+### Получение сырых данных
+- `scripts/get_auth_wb.py` — список авторизаций;
+- `scripts/get_supplier.py` — список поставщиков;
+- `scripts/get_supply_wb.py` — данные о поставках;
+- `scripts/get_supply_product.py` — продукты конкретной поставки (используйте `SUPPLIER_ID` и `PREORDER_ID` в `.env`).
 
 ## API
-- **Базовый URL**: https://postavkamp.ru/api
-- **Документация**: https://postavkamp.ru/api/docs
-- **Получение токена авторизации**: https://postavkamp.ru/api
+- **Базовый URL:** <https://postavkamp.ru/api>
+- **Документация:** <https://postavkamp.ru/api/docs>
+- **Получение токена:** <https://postavkamp.ru/api/get-token/>
 
 ## Контакты
-Для получения доступа и поддержки обращайтесь к администратору:
-- **Telegram**: @postavkamp_admin
-
-
-
-## Интеграция с Google Sheets
-
-1. Создайте проект в [Google Cloud Console](https://console.cloud.google.com/).
-2. Включите API `Google Sheets API` для вашего проекта.
-3. Создайте сервисный аккаунт и сгенерируйте JSON‑ключ. Скачайте его и сохраните, например, как `google_credentials.json`.
-4. Откройте нужную Google таблицу и поделитесь ею с email сервисного аккаунта.
-5. Скопируйте ID таблицы из её URL и укажите в переменной окружения `GOOGLE_SHEET_ID`.
-6. Заполните файл `.env` по примеру `.env_example`, добавив путь к ключу `GOOGLE_CREDENTIALS`, `GOOGLE_SHEET_ID` и `AUTHORIZATION_ID`.
-
-Скрипт `update_google_sheet.py` запускает получение данных из API и каждые 30 минут обновляет два листа Google таблицы:
-
-```bash
-python update_google_sheet.py
-```
-
-В таблице должны существовать листы `Suppliers` и `Supplies`.
-
+По вопросам доступа и поддержки — Telegram: [@postavkamp_admin](https://t.me/postavkamp_admin)
